@@ -11,7 +11,7 @@ else:
     from PythonParser import PythonParser
     from PythonParserVisitor import PythonParserVisitor
 
-class VisitorInterpreter(PythonParserVisitor):
+class Compiler(PythonParserVisitor):
 
     def __init__(self):
         super(PythonParserVisitor, self).__init__()

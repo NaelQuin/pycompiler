@@ -2,7 +2,7 @@ import sys
 from antlr4 import *
 from Python3Lexer import Python3Lexer
 from Python3Parser import Python3Parser
-from VisitorInterpreter import VisitorInterp
+from compiler_def import VisitorInterp
 
 def main(argv):
     input_stream = FileStream(argv[1])
