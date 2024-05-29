@@ -9,28 +9,48 @@ else:
 
 class PythonParserVisitor(ParseTreeVisitor):
 
-    # Visit a parse tree produced by PythonParser#start.
-    def visitStart(self, ctx:PythonParser.StartContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by PythonParser#code.
     def visitCode(self, ctx:PythonParser.CodeContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PythonParser#emptyLine.
-    def visitEmptyLine(self, ctx:PythonParser.EmptyLineContext):
+    # Visit a parse tree produced by PythonParser#stat.
+    def visitStat(self, ctx:PythonParser.StatContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PythonParser#expr.
-    def visitExpr(self, ctx:PythonParser.ExprContext):
+    # Visit a parse tree produced by PythonParser#stat_possibility.
+    def visitStat_possibility(self, ctx:PythonParser.Stat_possibilityContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PythonParser#comment.
-    def visitComment(self, ctx:PythonParser.CommentContext):
+    # Visit a parse tree produced by PythonParser#func.
+    def visitFunc(self, ctx:PythonParser.FuncContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#params.
+    def visitParams(self, ctx:PythonParser.ParamsContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#param_case.
+    def visitParam_case(self, ctx:PythonParser.Param_caseContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#param_typed.
+    def visitParam_typed(self, ctx:PythonParser.Param_typedContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#param_default.
+    def visitParam_default(self, ctx:PythonParser.Param_defaultContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#type.
+    def visitType(self, ctx:PythonParser.TypeContext):
         return self.visitChildren(ctx)
 
 
@@ -39,28 +59,53 @@ class PythonParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PythonParser#compareExp.
-    def visitCompareExp(self, ctx:PythonParser.CompareExpContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by PythonParser#parenExp.
-    def visitParenExp(self, ctx:PythonParser.ParenExpContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by PythonParser#logicalExp.
-    def visitLogicalExp(self, ctx:PythonParser.LogicalExpContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by PythonParser#notExp.
-    def visitNotExp(self, ctx:PythonParser.NotExpContext):
+    # Visit a parse tree produced by PythonParser#parenQuery.
+    def visitParenQuery(self, ctx:PythonParser.ParenQueryContext):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by PythonParser#boolean.
     def visitBoolean(self, ctx:PythonParser.BooleanContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#notQuery.
+    def visitNotQuery(self, ctx:PythonParser.NotQueryContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#spaced_queryR.
+    def visitSpaced_queryR(self, ctx:PythonParser.Spaced_queryRContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#spaced_queryLR.
+    def visitSpaced_queryLR(self, ctx:PythonParser.Spaced_queryLRContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#spaced_queryL.
+    def visitSpaced_queryL(self, ctx:PythonParser.Spaced_queryLContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#logicalQuery.
+    def visitLogicalQuery(self, ctx:PythonParser.LogicalQueryContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#compareExpr.
+    def visitCompareExpr(self, ctx:PythonParser.CompareExprContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#funcCall.
+    def visitFuncCall(self, ctx:PythonParser.FuncCallContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#expr.
+    def visitExpr(self, ctx:PythonParser.ExprContext):
         return self.visitChildren(ctx)
 
 

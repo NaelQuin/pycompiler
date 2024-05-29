@@ -5,6 +5,12 @@ from PythonLexer import PythonLexer as Lexer
 from PythonParser import PythonParser as Parser
 from compiler_def import Compiler
 
+# To generate compiler files
+# antlr4 -Dlanguage=Python3 -no-listener -visitor *.g4
+
+# To enable antlr4 command on terminal
+# export PATH="/home/quintino/.local/bin:$PATH"
+
 def main(argv):
     # Read script file
     input_stream = FileStream(argv[1])

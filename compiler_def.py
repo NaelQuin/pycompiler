@@ -1,9 +1,3 @@
-"""
-https://medium.com/analytics-vidhya/antlr-and-code-generation-a71ead442005
-http://lab.antlr.org/
-https://www.antlr.org/
-"""
-
 if "." in __name__:
     from .PythonParser import PythonParser
     from .PythonParserVisitor import PythonParserVisitor
@@ -58,27 +52,32 @@ class Compiler(PythonParserVisitor):
 
 
     # Visit a parse tree produced by PythonParser#compareExp.
-    def visitCompareExp(self, ctx:PythonParser.CompareExpContext):
+    def visitCompareExp(self, ctx:PythonParser.CompareExprContext):
+        print(('Here', ctx.getText(), type(ctx)))
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by PythonParser#parenExp.
-    def visitParenExp(self, ctx:PythonParser.ParenExpContext):
+    def visitParenExp(self, ctx:PythonParser.ParenQueryContext):
+        print(('Here', ctx.getText(), type(ctx)))
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by PythonParser#logicalExp.
-    def visitLogicalExp(self, ctx:PythonParser.LogicalExpContext):
+    def visitLogicalExp(self, ctx:PythonParser.LogicalQueryContext):
+        print(('Here', ctx.getText(), type(ctx)))
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by PythonParser#notExp.
-    def visitNotExp(self, ctx:PythonParser.NotExpContext):
+    def visitNotExp(self, ctx:PythonParser.NotQueryContext):
+        print(('Here', ctx.getText(), type(ctx)))
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by PythonParser#boolean.
     def visitBoolean(self, ctx:PythonParser.BooleanContext):
+        print(('Here', ctx.getText(), type(ctx)))
         return self.visitChildren(ctx)
 
 
