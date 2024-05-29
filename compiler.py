@@ -25,7 +25,7 @@ def main(argv):
     parser = Parser(stream)
 
     # Structure script file commands
-    tree = parser.start()
+    tree = parser.code()
 
     # Check for syntax errors
     if parser.getNumberOfSyntaxErrors() > 0:

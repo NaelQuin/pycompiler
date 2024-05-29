@@ -1,3 +1,5 @@
+from pyidebug import debug
+
 if "." in __name__:
     from .PythonParser import PythonParser
     from .PythonParserVisitor import PythonParserVisitor
@@ -13,38 +15,38 @@ class Compiler(PythonParserVisitor):
         return None
     
     # Visit a parse tree produced by PythonParser#emptyLine.
-    def visitEmptyLine(self, ctx:PythonParser.EmptyLineContext):
-        print(('Here', ctx.getText(), type(ctx)))
+    """def visitEmptyLine(self, ctx:PythonParser.EmptyLineContext):
+        #print(('Here', ctx.getText(), type(ctx)))
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by PythonParser#start.
     def visitStart(self, ctx:PythonParser.StartContext):
-        print(('Here', ctx.getText(), type(ctx)))
-        return self.visitChildren(ctx)
+        #print(('Here', ctx.getText(), type(ctx)))
+        return self.visitChildren(ctx)"""
 
 
     # Visit a parse tree produced by PythonParser#code.
     def visitCode(self, ctx:PythonParser.CodeContext):
-        print(('Here', ctx.getText(), type(ctx)))
+        #print(('Here', ctx.getText(), type(ctx)))
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by PythonParser#expr.
     def visitExpr(self, ctx:PythonParser.ExprContext):
-        print(('Here', ctx.getText(), type(ctx)))
+        #print(('Here', ctx.getText(), type(ctx)))
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PythonParser#comment.
+    """# Visit a parse tree produced by PythonParser#comment.
     def visitComment(self, ctx:PythonParser.CommentContext):
-        print(('Here', ctx.getText(), type(ctx)))
-        return self.visitChildren(ctx)
+        #print(('Here', ctx.getText(), type(ctx)))
+        return self.visitChildren(ctx)"""
 
 
     # Visit a parse tree produced by PythonParser#assignment.
     def visitAssignment(self, ctx:PythonParser.AssignmentContext):
-        print(('Here', ctx.getText(), type(ctx)))
+        #print(('Here', ctx.getText(), type(ctx)))
         var = ctx.getChild(0)
         value = ctx.getChild(-1)
         self.vars[var.getText()] = self.visit(value)
@@ -52,58 +54,72 @@ class Compiler(PythonParserVisitor):
 
 
     # Visit a parse tree produced by PythonParser#compareExp.
-    def visitCompareExp(self, ctx:PythonParser.CompareExprContext):
-        print(('Here', ctx.getText(), type(ctx)))
+    def visitCompareExpr(self, ctx:PythonParser.CompareExprContext):
+        #print(('Here', ctx.getText(), type(ctx)))
+        text = ctx.getText()
+        if '<' in text:
+            print(f'{text} é uma relação de menor que')
+        elif '>' in text:
+            print(f'{text} é uma relação de maior que')
+        elif '<=' in text:
+            print(f'{text} é uma relação de menor ou igual a')
+        elif '>=' in text:
+            print(f'{text} é uma relação de maior ou igual a')
+        elif '==' in text:
+            print(f'{text} é uma relação de igual a')
+        
+        print(f"Resultado no Python {eval(text)}")
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by PythonParser#parenExp.
     def visitParenExp(self, ctx:PythonParser.ParenQueryContext):
-        print(('Here', ctx.getText(), type(ctx)))
+        #print(('Here', ctx.getText(), type(ctx)))
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by PythonParser#logicalExp.
     def visitLogicalExp(self, ctx:PythonParser.LogicalQueryContext):
-        print(('Here', ctx.getText(), type(ctx)))
+        #print(('Here', ctx.getText(), type(ctx)))
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by PythonParser#notExp.
     def visitNotExp(self, ctx:PythonParser.NotQueryContext):
-        print(('Here', ctx.getText(), type(ctx)))
+        #print(('Here', ctx.getText(), type(ctx)))
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by PythonParser#boolean.
     def visitBoolean(self, ctx:PythonParser.BooleanContext):
-        print(('Here', ctx.getText(), type(ctx)))
+        #print(('Here', ctx.getText(), type(ctx)))
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by PythonParser#null.
     def visitNull(self, ctx:PythonParser.NullContext):
-        print(('Here', ctx.getText(), type(ctx)))
+        #print(('Here', ctx.getText(), type(ctx)))
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by PythonParser#string.
     def visitString(self, ctx:PythonParser.StringContext):
-        print(('Here', ctx.getText(), type(ctx)))
+        #print(('Here', ctx.getText(), type(ctx)))
         return self.visitChildren(ctx)
-
 
     # Visit a parse tree produced by PythonParser#number.
     def visitNumber(self, ctx:PythonParser.NumberContext):
-        print(('Here', ctx.getText(), type(ctx)))
+        #print(('Here', ctx.getText(), type(ctx)))
         text = ctx.getText()
+        #debug(globals(), locals())
         if '.' in text:
+            print(f'{text} Is a float')
             output = float(text)
         elif 'j' in text:
+            print(f'{text} Is a complex')
             output = complex(text)
-        elif text.startswith('0x') or text.startswith('0o'):
-            output = eval(text)
         else:
+            print(f'{text} Is an int')
             output = int(text)
         return output
 
