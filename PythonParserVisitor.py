@@ -14,13 +14,73 @@ class PythonParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by PythonParser#importing.
+    def visitImporting(self, ctx:PythonParser.ImportingContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#asStat.
+    def visitAsStat(self, ctx:PythonParser.AsStatContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#statIndent.
+    def visitStatIndent(self, ctx:PythonParser.StatIndentContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by PythonParser#stat.
     def visitStat(self, ctx:PythonParser.StatContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PythonParser#stat_possibility.
-    def visitStat_possibility(self, ctx:PythonParser.Stat_possibilityContext):
+    # Visit a parse tree produced by PythonParser#statPossibility.
+    def visitStatPossibility(self, ctx:PythonParser.StatPossibilityContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#whileLoop.
+    def visitWhileLoop(self, ctx:PythonParser.WhileLoopContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#forLoop.
+    def visitForLoop(self, ctx:PythonParser.ForLoopContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#varLoop.
+    def visitVarLoop(self, ctx:PythonParser.VarLoopContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#loopList.
+    def visitLoopList(self, ctx:PythonParser.LoopListContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#iterable.
+    def visitIterable(self, ctx:PythonParser.IterableContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#range.
+    def visitRange(self, ctx:PythonParser.RangeContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#enumerate.
+    def visitEnumerate(self, ctx:PythonParser.EnumerateContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#conditional.
+    def visitConditional(self, ctx:PythonParser.ConditionalContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#condition.
+    def visitCondition(self, ctx:PythonParser.ConditionContext):
         return self.visitChildren(ctx)
 
 
@@ -34,23 +94,18 @@ class PythonParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PythonParser#param_case.
-    def visitParam_case(self, ctx:PythonParser.Param_caseContext):
+    # Visit a parse tree produced by PythonParser#paramCase.
+    def visitParamCase(self, ctx:PythonParser.ParamCaseContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PythonParser#param_typed.
-    def visitParam_typed(self, ctx:PythonParser.Param_typedContext):
+    # Visit a parse tree produced by PythonParser#paramDefault.
+    def visitParamDefault(self, ctx:PythonParser.ParamDefaultContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PythonParser#param_default.
-    def visitParam_default(self, ctx:PythonParser.Param_defaultContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by PythonParser#type.
-    def visitType(self, ctx:PythonParser.TypeContext):
+    # Visit a parse tree produced by PythonParser#varType.
+    def visitVarType(self, ctx:PythonParser.VarTypeContext):
         return self.visitChildren(ctx)
 
 
@@ -59,8 +114,8 @@ class PythonParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PythonParser#parenQuery.
-    def visitParenQuery(self, ctx:PythonParser.ParenQueryContext):
+    # Visit a parse tree produced by PythonParser#operationQuery.
+    def visitOperationQuery(self, ctx:PythonParser.OperationQueryContext):
         return self.visitChildren(ctx)
 
 
@@ -69,33 +124,38 @@ class PythonParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by PythonParser#groupedQuery.
+    def visitGroupedQuery(self, ctx:PythonParser.GroupedQueryContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by PythonParser#notQuery.
     def visitNotQuery(self, ctx:PythonParser.NotQueryContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PythonParser#spaced_queryR.
-    def visitSpaced_queryR(self, ctx:PythonParser.Spaced_queryRContext):
+    # Visit a parse tree produced by PythonParser#spacedQueryL.
+    def visitSpacedQueryL(self, ctx:PythonParser.SpacedQueryLContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PythonParser#spaced_queryLR.
-    def visitSpaced_queryLR(self, ctx:PythonParser.Spaced_queryLRContext):
+    # Visit a parse tree produced by PythonParser#spacedQueryLR.
+    def visitSpacedQueryLR(self, ctx:PythonParser.SpacedQueryLRContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PythonParser#spaced_queryL.
-    def visitSpaced_queryL(self, ctx:PythonParser.Spaced_queryLContext):
+    # Visit a parse tree produced by PythonParser#spacedQueryR.
+    def visitSpacedQueryR(self, ctx:PythonParser.SpacedQueryRContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PythonParser#logicalQuery.
-    def visitLogicalQuery(self, ctx:PythonParser.LogicalQueryContext):
+    # Visit a parse tree produced by PythonParser#relationExpr.
+    def visitRelationExpr(self, ctx:PythonParser.RelationExprContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by PythonParser#compareExpr.
-    def visitCompareExpr(self, ctx:PythonParser.CompareExprContext):
+    # Visit a parse tree produced by PythonParser#queryId.
+    def visitQueryId(self, ctx:PythonParser.QueryIdContext):
         return self.visitChildren(ctx)
 
 
@@ -106,6 +166,41 @@ class PythonParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by PythonParser#expr.
     def visitExpr(self, ctx:PythonParser.ExprContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#tuple.
+    def visitTuple(self, ctx:PythonParser.TupleContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#list.
+    def visitList(self, ctx:PythonParser.ListContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#set.
+    def visitSet(self, ctx:PythonParser.SetContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#dict.
+    def visitDict(self, ctx:PythonParser.DictContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#dictEntry.
+    def visitDictEntry(self, ctx:PythonParser.DictEntryContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#unhashable.
+    def visitUnhashable(self, ctx:PythonParser.UnhashableContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#exprSeq.
+    def visitExprSeq(self, ctx:PythonParser.ExprSeqContext):
         return self.visitChildren(ctx)
 
 
@@ -121,6 +216,26 @@ class PythonParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by PythonParser#number.
     def visitNumber(self, ctx:PythonParser.NumberContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#valueList.
+    def visitValueList(self, ctx:PythonParser.ValueListContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#valueTuple.
+    def visitValueTuple(self, ctx:PythonParser.ValueTupleContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#valueDict.
+    def visitValueDict(self, ctx:PythonParser.ValueDictContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by PythonParser#valueSet.
+    def visitValueSet(self, ctx:PythonParser.ValueSetContext):
         return self.visitChildren(ctx)
 
 

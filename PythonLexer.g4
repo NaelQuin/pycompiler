@@ -2,7 +2,7 @@ lexer grammar PythonLexer;
 
 LINE_BREAK: '\n';
 TAB: '\t' | ' '' '' '' ';
-SPACE: ' ';
+WS: ' ';
 
 LPARENTHESIS: '(';
 RPARENTHESIS: ')';
@@ -17,26 +17,39 @@ COLON: ':';
 SEMI: ';';
 HASH: '#';
 
+RANGE: 'range';
+ENUMERATE: 'enumerate';
 DEF: 'def';
 RETURN: 'return';
-INT_TYPE: 'int';
-FLOAT_TYPE: 'float';
-STR_TYPE:'str';
-BOOL_TYPE: 'bool';
-DICT_TYPE: 'dict';
-LIST_TYPE: 'list';
-TUPLE_TYPE: 'tuple';
-FUNCTION_TYPE: 'function';
-OBJECT_TYPE: 'object';
+IMPORT: 'import';
+FROM: 'from';
+AS: 'as';
+IF: 'if';
+ELIF: 'elif';
+ELSE: 'else';
+WHILE: 'while';
+FOR: 'for';
+IN: 'in';
+fragment INT_TYPE: 'int';
+fragment FLOAT_TYPE: 'float';
+fragment STR_TYPE:'str';
+fragment BOOL_TYPE: 'bool';
+fragment DICT_TYPE: 'dict';
+fragment LIST_TYPE: 'list';
+fragment TUPLE_TYPE: 'tuple';
+fragment FUNCTION_TYPE: 'function';
+fragment OBJECT_TYPE: 'object';
+SET_TYPE: 'set';
 
-
+TYPE: INT_TYPE | FLOAT_TYPE | STR_TYPE | BOOL_TYPE | DICT_TYPE | LIST_TYPE | TUPLE_TYPE | FUNCTION_TYPE | OBJECT_TYPE;
 
 BOOLEAN: 'True' | 'False';
 NULL: 'None';
 STRING: '"' PRINTABLE '"'
     | '\'' PRINTABLE '\''
     | '\'\'\'' (PRINTABLE | '\n')* '\'\'\''
-    | '"""' (PRINTABLE | '\n')* '"""';
+    | '"""' (PRINTABLE | '\n')* '"""'
+    ;
 
 fragment AND: 'and' | '&';
 fragment OR: 'or' | '|';
@@ -66,7 +79,9 @@ BIN_OPERATORS: LSHIFT
    | RSHIFT
    ;
 
-fragment PRINTABLE: LETTERS_ | DIGIT | SPACE;
+ID: LETTERS_ (LETTERS_ | DIGIT)*;
+
+fragment PRINTABLE: LETTERS_ | DIGIT | WS;
 
 fragment LETTERS_: [a-zA-Z_];
 fragment LETTERS: [a-zA-Z];
@@ -83,6 +98,4 @@ NUMBER: REAL
    | COMPLEX
    ;
 
-WS: [\r\f]+ -> skip;
-
-ID: LETTERS_ (LETTERS_ | DIGIT)?;
+WS_: [\r\f]+ -> skip;

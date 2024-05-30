@@ -4,60 +4,103 @@ options {
   tokenVocab = PythonLexer;
 }
 
-code: (stat | '\n')* EOF;
+code: (importing | stat | '\n')* EOF;
 
-stat: stat_possibility '\n'?;
-
-stat_possibility: func
-  | expr 
-  | query
-  | assignment
+importing: 'import' WS+ ID ('.' ID)* asStat?
+  | 'from' WS+ ID ('.' ID)* WS+ 'import' WS+ ID (WS* ',' WS* ID)* asStat?
   ;
 
-func: 'def' SPACE+ ID '(' params? ')' SPACE* ':' '\n' (TAB+ stat)* TAB+ 'return' SPACE+ expr? '\n';
+asStat: WS+ 'as' WS+ ID;
 
-params: param_case (',' param_case)*;
+statIndent: TAB stat;
 
-param_case: ID param_typed param_default?;
-param_typed: ':' type;
-param_default: '=' expr;
+stat: statPossibility '\n'?;
 
-// func: 'def' SPACE+ ID '(' params? ')' SPACE* ':' '\n' (TAB+ stat)* TAB+ 'return' SPACE+ expr? '\n';
+statPossibility: func
+  | expr
+  | query
+  | assignment
+  | conditional
+  | forLoop
+  | whileLoop
+  ;
 
-// params: param (',' param)*;
+whileLoop: 'while' condition ':' '\n'
+  statIndent* '\n';
 
-// param: ID (':' type)? ('=' expr);
+forLoop: 'for' varLoop 'in' WS+ (loopList | ID) ':' '\n'
+  statIndent* '\n';
 
-type: 'int' | 'float' | 'str' | 'bool' 
-  | 'None' | 'dict' | 'list' | 'tuple'
-  | 'function' | 'object';
+varLoop: WS+ ID WS+ (',' WS* ID)*;
+loopList: iterable | range | enumerate;
 
-assignment: ID SPACE* '=' SPACE* (expr | query);
+iterable: list | tuple | STRING | set | dict;
+range: 'range' '(' expr? (',' expr)? (',' expr)? ')';
+enumerate: 'enumerate' '(' (iterable | ID) ')';
+
+conditional: 'if' condition ':' '\n' statIndent*
+  ('elif' condition ':' '\n' statIndent*)*
+  ('else' ':' '\n' statIndent*)?
+  ;
+
+condition: WS query;
+
+func: 'def' WS+ ID '(' params? ')' WS* ':' '\n' statIndent*
+  TAB+ 'return' WS+ expr? '\n';
+
+params: paramCase (',' paramCase)*;
+
+paramCase: ID varType? paramDefault?;
+paramDefault: WS* '=' WS* expr WS*;
+
+varType: WS* ':' WS* TYPE;
+
+assignment: ID varType? WS* '=' WS* (expr | query);
 
 query: BOOLEAN                   # boolean
-  | SPACE+ query SPACE+          # spaced_queryLR
-  | SPACE+ query                 # spaced_queryL
-  | query SPACE+                 # spaced_queryR
-  | '(' query ')'                # parenQuery
+  | ID                           # queryId
+  | WS+ query WS*                # spacedQueryLR
+  | query WS+                    # spacedQueryR
+  | '(' query ')'                # groupedQuery
   | NOT query                    # notQuery
-  | query LOGICAL_OPERATOR query # logicalQuery
-  | expr RELATIONS expr          # compareExpr
+  | query LOGICAL_OPERATOR query # operationQuery
+  | expr RELATIONS expr          # relationExpr
   ;
 
 funcCall: ID '(' ((expr|query) (',' (expr|query))*)? ')';
 
-expr: ID
+expr: funcCall
+  | ID
   | value
-  | SPACE+ expr SPACE+
-  | SPACE+ expr
-  | expr SPACE+
+  | WS+ expr WS*
+  | expr WS+
   | '(' expr ')'
   | expr ARITIMETIC_OPERATORS expr
   ;
 
-value: NULL    # null
-  | STRING     # string
-  | NUMBER     # number
+tuple: '(' exprSeq? ')';
+list: '[' exprSeq? ']';
+set: '{' exprSeq '}' | 'set' '(' ')';
+dict: '{' (dictEntry (',' dictEntry)*)? '}';
+
+dictEntry: WS* unhashable WS* ':' WS* expr WS*;
+unhashable: STRING
+  | NUMBER
+  | BOOLEAN
+  | NULL
+  | tuple
+  ;
+
+exprSeq: expr WS* (',' WS* expr)* ','?;
+
+
+value: NULL # null
+  | STRING  # string
+  | NUMBER  # number
+  | list    # valueList
+  | tuple   # valueTuple
+  | dict    # valueDict
+  | set     # valueSet
   ;
 
 // def f(x:int,y):
